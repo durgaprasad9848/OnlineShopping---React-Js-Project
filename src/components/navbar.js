@@ -54,10 +54,7 @@ const count = totalCartCount();
         </div>
         
       </div>
-      <div className="generics">
-        {" "}
-        <h1 className="generics-text"> The Generics</h1>{" "}
-      </div>
+    
     </div>
   );
 };

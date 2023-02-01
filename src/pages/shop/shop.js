@@ -5,11 +5,14 @@ import "./shop.css";
 
 export const Shop = () => {
   return (
-    <div className="shop">
+    <div>
+      <div className="generics">
+        <h1 className="generics-text"> The Generics</h1>{" "}
+      </div>
       <div className="shopTitle">
         <h1>Music</h1>
       </div>
-      <br/>
+      <br />
 
       <div className="products">
         {PRODUCTS.map((product) => (
@@ -19,5 +22,3 @@ export const Shop = () => {
     </div>
   );
 };
-
- 
