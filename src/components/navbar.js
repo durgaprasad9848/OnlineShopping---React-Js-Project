@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Cart } from "../pages/cart/cart";
 import "./navbar.css";
 import { Card, Button } from "react-bootstrap";
@@ -13,12 +13,12 @@ const count = totalCartCount();
     <div>
       <div className="navbar">
         <div className="links">
-          <Link to="/Home">Home </Link>
-          <Link to="/"> Shop </Link>
-          <Link to="/About"> About </Link>
+          <NavLink to="/Home">Home </NavLink>
+          <NavLink to="/"> Shop </NavLink>
+          <NavLink to="/About"> About </NavLink>
         </div>
         <div className="Cart-icon"> 
-        <Link to="/cart">
+        <NavLink to="/cart">
           <Button
             
             style={{
@@ -50,7 +50,7 @@ const count = totalCartCount();
               }}
             >{count}</div>
           </Button>
-        </Link>
+        </NavLink>
         </div>
         
       </div>
