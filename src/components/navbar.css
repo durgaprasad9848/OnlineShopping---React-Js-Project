@@ -20,15 +20,7 @@
     font-size: 25px;
   }
 
-  .generics {
-    width: 100%;
-    height: 150px;
-    background-color: gray;
-    display: flex-center;
-    text-align:center;
-    align-items: center;
-  
-  }
+
 
   .generics-text{
    text-align: center;
