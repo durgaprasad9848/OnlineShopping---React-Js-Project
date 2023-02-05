@@ -16,6 +16,7 @@ const count = totalCartCount();
           <NavLink to="/Home">Home </NavLink>
           <NavLink to="/"> Shop </NavLink>
           <NavLink to="/About"> About </NavLink>
+          <NavLink to="/Contact">Contact</NavLink>
         </div>
         <div className="Cart-icon"> 
         <NavLink to="/cart">
