@@ -19,7 +19,7 @@ const count = totalCartCount();
           <NavLink to="/Contact">Contact</NavLink>
         </div>
         <div className="Cart-icon"> 
-        <NavLink to="/cart">
+        <NavLink to="/Cart">
           <Button
             
             style={{
