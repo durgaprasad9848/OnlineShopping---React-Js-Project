@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { PRODUCTS } from "../../products";
 import { Product } from "./product";
 import "./shop.css";
-
+import AuthContext from "../../context/auth-contex";
 export const Shop = () => {
+  const ctx = useContext(AuthContext);
+  const navigate = useNavigate();
+  useEffect(()=>{ 
+    if(!ctx.isLoggedIn)
+    {
+      navigate('/Login');
+    }
+
+  },[]);
+ 
   return (
     <div>
       <div className="generics">

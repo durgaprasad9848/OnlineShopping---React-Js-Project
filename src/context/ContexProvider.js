@@ -56,7 +56,7 @@ const ContextProvider = (props) => {
     localStorage.removeItem("token");
   //  localStorage.removeItem("expireTime");
     setLoginToken(() => null);
-    navigate("/");
+    navigate("/Login");
   };
   const userIsLogggedIn = !!loginToken;
 
