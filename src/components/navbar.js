@@ -1,13 +1,21 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 import { Cart } from "../pages/cart/cart";
 import "./navbar.css";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Nav } from "react-bootstrap";
 import { ShopContext } from "../context/shop-context";
+import AuthContext from "../context/auth-contex";
 
 export const Navbar = () => {
 const {totalCartCount} = useContext(ShopContext);
 const count = totalCartCount();
+
+const ctx = useContext(AuthContext);
+ 
+console.log("HI",ctx.logInToken);
+ const toShow =  ctx.logInToken===null;
+ console.log(toShow)
+ const navigate = useNavigate();
 
   return (
     <div>
@@ -16,8 +24,14 @@ const count = totalCartCount();
           <NavLink to="/Home">Home </NavLink>
           <NavLink to="/"> Shop </NavLink>
           <NavLink to="/About"> About </NavLink>
+          
           <NavLink to="/Contact">Contact</NavLink>
+          {toShow && <NavLink to= "/Login">Login</NavLink>}
+          { !toShow && <li>
+            <button onClick={ctx.removeToken}>Logout</button>
+          </li>}
         </div>
+      
         <div className="Cart-icon"> 
         <NavLink to="/Cart">
           <Button

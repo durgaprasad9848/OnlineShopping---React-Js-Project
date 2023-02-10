@@ -14,13 +14,14 @@ import { ShopContextProvider } from "./context/shop-context";
 import { Home } from "./pages/Home";
 import { Contact } from "./pages/contact/Contact";
 import { Product_page } from "./pages/Products/Product_page";
- 
+import ContextProvider from "./context/ContexProvider";
+import AuthForm from "./components/Auth/AuthForm";
 
 function App() {
   return (
     <div className="App">
       <ShopContextProvider>
-       
+        <ContextProvider>
           <Navbar />
           <Routes>
              
@@ -31,9 +32,9 @@ function App() {
             <Route path="/About" element={<About />} />
             <Route path="/Cart" element={<Cart />} />
             <Route path="/Contact" element={<Contact />} />
-     
+            <Route path ="/Login" element={<AuthForm/>}/>
           </Routes>
-      
+        </ContextProvider>
       </ShopContextProvider>
     </div>
   );
