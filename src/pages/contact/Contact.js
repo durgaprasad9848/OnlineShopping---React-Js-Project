@@ -34,6 +34,7 @@ export const Contact = () => {
   return (
     <div className="page">
       <form>
+        <center><h3>contact us</h3></center>
         <h5>Name</h5>
         <input type="text" ref={name} />
         <h5>Email</h5>
@@ -54,4 +55,3 @@ export const Contact = () => {
     </div>
   );
 };
- 

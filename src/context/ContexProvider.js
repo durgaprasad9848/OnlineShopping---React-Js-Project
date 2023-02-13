@@ -1,11 +1,39 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import AuthContext from "./auth-contex";
 import { useNavigate } from "react-router-dom";
+import { ShopContext } from "./shop-context";
+
 
 const ContextProvider = (props) => {
-  const [loginToken, setLoginToken] = useState(null);
+  const initalToken = localStorage.getItem("token");
+  const [loginToken, setLoginToken] = useState(initalToken);
+
+  const ctx = useContext(ShopContext);
 
   const navigate = useNavigate();
+
+
+
+
+  const getDefaultCart = async () => {
+    let id=window.localStorage.getItem("email");
+    let url = `https://test-api-c7d27-default-rtdb.firebaseio.com/${id}.json`;
+     const data = await fetch(
+       url
+     )
+       .then((response) => response.json())
+       .then((data) => {
+        let temp ={};
+        for(let i=1;i<data.length;i++)
+        {
+          temp[i]=data[i];
+        }
+        ctx.setCartItems(temp);
+        console.log("fetched",temp);
+       });
+   
+   
+   };
 
 //   const checkForInactivity = () => {
 //     const expireTime = localStorage.getItem("expireTime");
@@ -47,6 +75,13 @@ const ContextProvider = (props) => {
     localStorage.setItem("token", idToken);
    // localStorage.setItem("expireTime", Date.now());
 
+  
+   
+
+   getDefaultCart();
+
+
+
     setLoginToken(() => {
       return idToken;
     });
@@ -54,12 +89,15 @@ const ContextProvider = (props) => {
 
   const removeTokenHandler = () => {
     localStorage.removeItem("token");
-  //  localStorage.removeItem("expireTime");
+    localStorage.removeItem("email");
+   
+    ctx.setCartItems({1: 0, 2: 0, 3: 0, 4: 0})
+    localStorage.removeItem("cart");
     setLoginToken(() => null);
     navigate("/Login");
   };
   const userIsLogggedIn = !!loginToken;
-
+  console.log("islog",userIsLogggedIn);
   const contextValue = {
     isLoggedIn: userIsLogggedIn,
     logInToken: loginToken,

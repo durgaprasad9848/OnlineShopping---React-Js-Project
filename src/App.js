@@ -1,3 +1,7 @@
+
+
+
+
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -16,8 +20,13 @@ import { Contact } from "./pages/contact/Contact";
 import { Product_page } from "./pages/Products/Product_page";
 import ContextProvider from "./context/ContexProvider";
 import AuthForm from "./components/Auth/AuthForm";
+import { useContext } from "react";
+
+import AuthContext from "./context/auth-contex";
 
 function App() {
+  const ctx = useContext(AuthContext);
+  console.log("login state",ctx.isLoggedIn);
   return (
     <div className="App">
       <ShopContextProvider>

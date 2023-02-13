@@ -27,6 +27,7 @@ const AuthForm = () => {
     console.log(enteredEmail, enteredPassword);
     setIsLoading(true);
     if (isLogin) {
+      localStorage.setItem("email",enteredEmail.replace("@gmail.com",""));
       try {
         const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDRuVNpK483qXGu6QL_IOKaFmOV7seq2_4",
           {
@@ -55,6 +56,7 @@ const AuthForm = () => {
         console.log(error);
         alert(error)
       }
+     
     } else {
       try {
         const response = await fetch(
@@ -81,6 +83,26 @@ const AuthForm = () => {
         console.log(error);
         alert(error);
       }
+
+
+
+
+      const createdb = await fetch(
+        `https://test-api-c7d27-default-rtdb.firebaseio.com/${enteredEmail.replace("@gmail.com","")}.json`,
+        {
+          method: "PUT",
+          body: JSON.stringify({1:0,2:0,3:0,4:0}),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const result = await createdb.json();
+      console.log(result);
+      
+      alert("Sign up completed - Please login ");
+      navigate("/");
+
     }
   };
 
