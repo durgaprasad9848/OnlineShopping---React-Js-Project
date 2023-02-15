@@ -1,21 +1,20 @@
-import { useState, useRef, useContext} from "react";
-import {useNavigate} from 'react-router-dom';
- 
+import { useState, useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import AuthContext from "../../context/auth-contex";
 import classes from "./AuthForm.module.css";
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const[isLoading,setIsLoading]=useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const ctx = useContext(AuthContext)
-  console.log(ctx)
+  const ctx = useContext(AuthContext);
+  console.log(ctx);
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -27,9 +26,10 @@ const AuthForm = () => {
     console.log(enteredEmail, enteredPassword);
     setIsLoading(true);
     if (isLogin) {
-      localStorage.setItem("email",enteredEmail.replace("@gmail.com",""));
+      localStorage.setItem("email", enteredEmail.replace("@gmail.com", ""));
       try {
-        const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDRuVNpK483qXGu6QL_IOKaFmOV7seq2_4",
+        const response = await fetch(
+          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDRuVNpK483qXGu6QL_IOKaFmOV7seq2_4",
           {
             method: "POST",
             body: JSON.stringify({
@@ -49,14 +49,12 @@ const AuthForm = () => {
         }
         console.log(data.idToken);
         ctx.storeToken(data.idToken);
-        navigate('/');
+        navigate("/");
         // ctx.logInToken(data.idToken)
-
       } catch (error) {
         console.log(error);
-        alert(error)
+        alert(error);
       }
-     
     } else {
       try {
         const response = await fetch(
@@ -84,14 +82,14 @@ const AuthForm = () => {
         alert(error);
       }
 
-
-
-
       const createdb = await fetch(
-        `https://test-api-c7d27-default-rtdb.firebaseio.com/${enteredEmail.replace("@gmail.com","")}.json`,
+        `https://test-api-c7d27-default-rtdb.firebaseio.com/${enteredEmail.replace(
+          "@gmail.com",
+          ""
+        )}.json`,
         {
           method: "PUT",
-          body: JSON.stringify({1:0,2:0,3:0,4:0}),
+          body: JSON.stringify({ 1: 0, 2: 0, 3: 0, 4: 0 }),
           headers: {
             "Content-Type": "application/json",
           },
@@ -99,10 +97,9 @@ const AuthForm = () => {
       );
       const result = await createdb.json();
       console.log(result);
-      
+
       alert("Sign up completed - Please login ");
       navigate("/");
-
     }
   };
 
@@ -119,9 +116,9 @@ const AuthForm = () => {
           <input ref={passwordRef} type="password" id="password" required />
         </div>
         <div className={classes.actions}>
-          {!isLoading &&<button >
-            {isLogin ? "Login" : "Create Account"}
-          </button>}
+          {!isLoading && (
+            <button>{isLogin ? "Login" : "Create Account"}</button>
+          )}
           {isLoading && <p>Sending request...</p>}
 
           {/* {request && <p>Sending Request...</p>} */}

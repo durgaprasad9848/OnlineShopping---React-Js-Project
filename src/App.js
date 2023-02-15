@@ -1,15 +1,13 @@
-
-
-
-
 import "./App.css";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   createBrowserRouter,
- 
 } from "react-router-dom";
+
+ 
+
 import { Navbar } from "./components/navbar";
 import { Shop } from "./pages/shop/shop"; //
 import { About } from "./pages/About"; //
@@ -24,24 +22,26 @@ import { useContext } from "react";
 
 import AuthContext from "./context/auth-contex";
 
+ 
+
 function App() {
   const ctx = useContext(AuthContext);
-  console.log("login state",ctx.isLoggedIn);
+  console.log("login state", ctx.isLoggedIn);
   return (
     <div className="App">
+
       <ShopContextProvider>
         <ContextProvider>
           <Navbar />
           <Routes>
-             
             <Route path="/Home" element={<Home />} />
             <Route path="/" element={<Shop />} />
-            <Route path = "/Product_page/:productId" element={<Product_page/>}/>
-            
+            <Route path="/Product_page/:productId" element={<Product_page />} />
+
             <Route path="/About" element={<About />} />
             <Route path="/Cart" element={<Cart />} />
             <Route path="/Contact" element={<Contact />} />
-            <Route path ="/Login" element={<AuthForm/>}/>
+            <Route path="/Login" element={<AuthForm />} />
           </Routes>
         </ContextProvider>
       </ShopContextProvider>
